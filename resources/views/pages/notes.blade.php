@@ -29,7 +29,7 @@
         <div class="p-6 grid grid-cols-2 md:grid-cols-3 gap-3">
             @foreach ($datas as $data)
                 <div
-                    class="pt-6 px-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="pt-6 break-words px-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <p class="mb-2 text-[1.2rem] font-normal tracking-tight text-white ">{{ @$data->title }}</p>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ @$data->notes }}</p>
                     <div class="md:flex justify-between items-center mb-3">
