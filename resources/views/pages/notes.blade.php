@@ -1,7 +1,7 @@
 @extends('../index')
 @section('title', $user->nickname)
 @section('content')
-    <div class="w-full h-[100vh] bg-cyan-600" id="bg-blur">
+    <div class="w-full relative h-screen bg-cyan-600" id="bg-blur">
         <nav class="md:flex md:justify-between items-center bg-slate-200 w-full py-3 px-8">
             <div class="flex">
                 <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -26,16 +26,18 @@
         @if (!$totalNotes)
             <p class="text-center text-slate-300 font-medium text-[1.2rem]">No notes to be shown</p>
         @endif
-        <div class="p-6 grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="p-6 flex relative flex-wrap gap-3">
             @foreach ($datas as $data)
-                <div
-                    class="pt-6 break-words px-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <p class="mb-2 text-[1.2rem] font-normal tracking-tight text-white ">{{ @$data->title }}</p>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ @$data->notes }}</p>
-                    <div class="md:flex justify-between items-center mb-3">
-                        <p class="font-normal text-[.8rem] text-gray-700 dark:text-gray-400">
+                <div class="pt-6 min-w-[210px] max-w-[350px] h-[220px] relative break-words px-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="relative h-[140px] w-full  overflow-y-auto   ">
+                        <p class="mb-2 text-[1.2rem] font-normal tracking-tight text-white ">{{ @$data->title }}</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ @$data->notes }}</p>
+                    </div>
+
+                    <div class="md:flex w-full mt-5  h-[20px] relative z-10 justify-between gap-x-5 items-center mb-3">
+                        <p class="absolute bottom-0 font-normal text-[.8rem] text-gray-700 dark:text-gray-400">
                             {{ $data->updated_at->format('M j, Y') }}</p>
-                        <div>
+                        <div class="absolute bottom-0 right-0">
                             <a href="{{ route('editNote', ['noteid' => $data->id]) }}" class="font-normal text-[.8rem] text-gray-700 dark:text-gray-400 hover:dark:text-gray-200">Edit</a>
                             <span class="text-gray-500">|</span>
                             <button data-id="{{ $data->id }}" class="font-normal text-[.8rem] text-gray-700 dark:text-gray-400 hover:dark:text-gray-200" onclick="openModal(this.getAttribute('data-id'))">Delete</button>
